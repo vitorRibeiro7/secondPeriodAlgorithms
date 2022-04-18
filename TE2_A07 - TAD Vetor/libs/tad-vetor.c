@@ -32,7 +32,20 @@ bool vet_anexar(Vetor *v, int elemento)
 
     if (v->qtd >= v->tam)
     {
-        
+
+        int tamAux = v->tam * 2;
+
+        int *v2;
+        v2 = (int *)calloc(tamAux, sizeof(int));
+
+        for (int i = 0; i < v->tam; i++)
+        {
+            v2[i] = v->vet[i];
+        }
+
+        v->tam = tamAux;
+        free(v->vet);
+        v->vet = v2;
     }
 
     v->vet[v->qtd] = elemento;
@@ -66,7 +79,9 @@ bool vet_removerPosicao(Vetor *v, int posicao, int *endereco)
     return true;
 }
 
-int vet_removerElemento(Vetor *v, int elemento);
+int vet_removerElemento(Vetor *v, int elemento)
+{
+}
 int vet_tamanho(Vetor *v);
 bool vet_elemento(Vetor *v, int posicao, int *saida);
 int vet_posicao(Vetor *v, int elemento);
@@ -76,7 +91,13 @@ void vet_imprimir(Vetor *v)
     printf("[");
     for (int i = 0; i < v->tam; i++)
     {
-        printf("%i, ", v->vet[i]);
+
+        printf("%i", v->vet[i]);
+
+        if (i < v->tam - 1)
+        {
+            printf(", ");
+        }
     }
     printf("]");
 }
