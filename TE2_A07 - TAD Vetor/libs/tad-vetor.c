@@ -57,7 +57,47 @@ bool vet_anexar(Vetor *v, int elemento)
 bool vet_inserir(Vetor *v, int elemento, int posicao)
 {
 
-    v->vet[posicao] = elemento;
+    if (v->qtd >= v->tam)
+    {
+
+        int tamAux = v->tam * 2;
+
+        int *v2;
+        v2 = (int *)calloc(tamAux, sizeof(int));
+
+        for (int i = 0; i < v->tam; i++)
+        {
+            v2[i] = v->vet[i];
+        }
+
+        v->tam = tamAux;
+        free(v->vet);
+        v->vet = v2;
+    }
+
+    int *v2 = (int *)calloc(v->tam, sizeof(int));
+
+    int aux;
+
+    for (int i = 0; i < v->tam; i++)
+    {
+        if (i < posicao)
+        {
+            v2[i] = v->vet[i];
+        }
+        if (i == posicao)
+        {
+            aux = v->vet[i];
+            v2[i] = elemento;
+        }
+        if (i > posicao)
+        {
+            v2[i] = aux;
+            aux = v->vet[i];
+        }
+    }
+
+    v->vet = v2;
     v->qtd++;
 
     return true;

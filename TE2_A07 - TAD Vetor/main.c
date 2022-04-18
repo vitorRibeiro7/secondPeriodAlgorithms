@@ -9,19 +9,20 @@ int main()
 
     vet_anexar(v, 1);
     vet_anexar(v, 2);
-    vet_anexar(v, 30);
-    vet_anexar(v, 10);
-    vet_anexar(v, 20);
-    vet_anexar(v, 30);
-    vet_anexar(v, 10);
-    vet_anexar(v, 20);
-    vet_anexar(v, 30);
-    vet_anexar(v, 30);
-    vet_anexar(v, 11);
+    vet_anexar(v, 3);
+    vet_anexar(v, 4);
+    vet_anexar(v, 5);
+    vet_anexar(v, 6);
+    vet_anexar(v, 7);
     vet_imprimir(v); // [10,20,30]
 
-    // vet_inserir(v, 15, 1);
-    // vet_imprimir(v); // [10,15,20,30]
+    printf("\n");
+
+    vet_inserir(v, 15, 3);
+    vet_inserir(v, 16, 4);
+    vet_inserir(v, 17, 5);
+    vet_inserir(v, 17, 20);
+    vet_imprimir(v); // [10,15,20,30]
 
     // vet_inserir(v, 5, 0);
     // vet_imprimir(v); // [5,10,15,20,30]
