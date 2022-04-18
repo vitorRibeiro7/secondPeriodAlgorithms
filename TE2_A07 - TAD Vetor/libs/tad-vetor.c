@@ -137,7 +137,17 @@ bool vet_elemento(Vetor *v, int posicao, int *saida)
     *saida = v->vet[posicao];
     return true;
 }
-int vet_posicao(Vetor *v, int elemento);
+int vet_posicao(Vetor *v, int elemento)
+{
+
+    for (int i = 0; i < v->qtd; i++)
+    {
+        if (v->vet[i] == elemento)
+        {
+            return i;
+        }
+    }
+}
 void vet_imprimir(Vetor *v)
 {
 
