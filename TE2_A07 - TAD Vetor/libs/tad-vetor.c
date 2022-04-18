@@ -122,8 +122,21 @@ bool vet_removerPosicao(Vetor *v, int posicao, int *endereco)
 int vet_removerElemento(Vetor *v, int elemento)
 {
 }
-int vet_tamanho(Vetor *v);
-bool vet_elemento(Vetor *v, int posicao, int *saida);
+int vet_tamanho(Vetor *v)
+{
+    return v->qtd;
+}
+bool vet_elemento(Vetor *v, int posicao, int *saida)
+{
+
+    if (v->vet[posicao] == NULL)
+    {
+        return false;
+    }
+
+    *saida = v->vet[posicao];
+    return true;
+}
 int vet_posicao(Vetor *v, int elemento);
 void vet_imprimir(Vetor *v)
 {
