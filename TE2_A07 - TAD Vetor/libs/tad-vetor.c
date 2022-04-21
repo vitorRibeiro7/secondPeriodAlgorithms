@@ -1,7 +1,8 @@
 // tad_vetor.c
 #include "tad-vetor.h"
-#define TAMANHO 10
+#define TAMANHO 5
 #include <stdio.h>
+#include <string.h>
 
 /********************************************
  * Especificação dos dados
@@ -121,6 +122,20 @@ bool vet_removerPosicao(Vetor *v, int posicao, int *endereco)
 
 int vet_removerElemento(Vetor *v, int elemento)
 {
+
+    int pos = -1;
+
+    for (int i = 0; i < v->qtd; i++)
+    {
+        if (v->vet[i] == elemento)
+        {
+            pos = i;
+            v->vet[i] = NULL;
+            free(v->vet[i]);
+        }
+    }
+
+    return pos;
 }
 int vet_tamanho(Vetor *v)
 {
@@ -165,5 +180,20 @@ void vet_imprimir(Vetor *v)
     printf("]");
 }
 
-void vet_desalocar(Vetor **endVetor);
-bool vet_toString(Vetor *v, char *saida);
+void vet_desalocar(Vetor **endVetor)
+{
+    free(endVetor);
+    endVetor = NULL;
+}
+
+bool vet_toString(Vetor *v, char *saida)
+{
+    char str[200];
+
+    for (int i = 0; i < v->qtd; i++)
+    {
+        itoa(v->vet[i], str, v->vet[i]);
+    }
+
+    *saida = str;
+}
