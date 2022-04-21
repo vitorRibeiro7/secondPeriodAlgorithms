@@ -188,12 +188,29 @@ void vet_desalocar(Vetor **endVetor)
 
 bool vet_toString(Vetor *v, char *saida)
 {
-    char str[200];
-
-    for (int i = 0; i < v->qtd; i++)
+    if (v == NULL)
     {
-        itoa(v->vet[i], str, v->vet[i]);
+        return false;
     }
 
-    *saida = str;
+    saida[0] = '\0';
+
+    strcat(saida, "["); // insere na string o valor passado
+
+    for (int i = 0; i < v->tam; i++)
+    {
+        char casting[50];
+
+        sprintf(casting, "%d", v->vet[i]);
+        strcat(saida, casting);
+
+        if (i < (v->tam) - 1)
+        {
+            strcat(saida, ",");
+        }
+    }
+
+    strcat(saida, "]\n");
+
+    return true;
 }
