@@ -21,6 +21,9 @@ Pilha *pilha_criar()
     Pilha *p;
 
     p = (Pilha *)malloc(sizeof(Pilha));
+    p->vetor = (int *)malloc(TAM_INICIAL * sizeof(int));
+    p->tamVetor = TAM_INICIAL;
+    p->qtdeElementos = 0;
 
     return p;
 }
@@ -36,6 +39,7 @@ bool pilha_empilhar(Pilha *p, TipoElemento elemento)
     }
 
     p->vetor[p->qtdeElementos] = elemento;
+    p->qtdeElementos++;
 
     return true;
 }
@@ -44,7 +48,7 @@ bool pilha_topo(Pilha *p, TipoElemento *saida);
 bool pilha_vazia(Pilha *p);
 void pilha_imprimir(Pilha *p)
 {
-    for (int i = 0; i < p->qtdeElementos - 1; i++)
+    for (int i = 0; i < p->qtdeElementos; i++)
     {
         printf("%i ", p->vetor[i]);
     }
