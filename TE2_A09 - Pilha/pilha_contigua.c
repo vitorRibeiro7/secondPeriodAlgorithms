@@ -85,6 +85,8 @@ void pilha_imprimir(Pilha *p)
     {
         printf("%i ", p->vetor[i]);
     }
+
+    printf("\n");
 }
 int pilha_tamanho(Pilha *p)
 {
@@ -104,6 +106,54 @@ Pilha *pilha_clone(Pilha *p)
 
     return aux;
 }
-void pilha_inverter(Pilha *p);
-bool pilha_empilharTodos(Pilha *p, TipoElemento *vetor, int tamVetor);
-bool pilha_toString(Pilha *f, char *str);
+void pilha_inverter(Pilha *p)
+{
+    Pilha *clone;
+
+    clone = pilha_clone(p);
+
+    int j = pilha_tamanho(p) - 1;
+
+    for (int i = 0; i < clone->qtdeElementos; i++)
+    {
+        p->vetor[i] = clone->vetor[j];
+
+        j--;
+    }
+}
+bool pilha_empilharTodos(Pilha *p, TipoElemento *vetor, int tamVetor)
+{
+
+    for (int i = 0; i < tamVetor; i++)
+    {
+        pilha_empilhar(p, vetor[i]);
+    }
+}
+bool pilha_toString(Pilha *f, char *str)
+{
+    if (f == NULL)
+    {
+        return false;
+    }
+
+    str[0] = '\0';
+
+    strcat(str, "["); // insere na string o valor passado
+
+    for (int i = 0; i < f->qtdeElementos; i++)
+    {
+        char casting[50];
+
+        sprintf(casting, "%d", f->vetor[i]);
+        strcat(str, casting);
+
+        if (i < (f->qtdeElementos) - 1)
+        {
+            strcat(str, ",");
+        }
+    }
+
+    strcat(str, "]\n");
+
+    return true;
+}

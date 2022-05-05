@@ -9,9 +9,9 @@ int main()
 
     pilha_empilhar(p1, 10);
     pilha_empilhar(p1, 20);
-    pilha_empilhar(p1, 20);
-    pilha_empilhar(p1, 20);
-    pilha_empilhar(p1, 100);
+    pilha_empilhar(p1, 30);
+    pilha_empilhar(p1, 40);
+    pilha_empilhar(p1, 50);
 
     pilha_imprimir(p1);
 
@@ -40,6 +40,30 @@ int main()
     printf("\n");
 
     pilha_imprimir(p1);
+
+    printf("\nInversão da pilha:\n");
+
+    pilha_imprimir(p1);
+
+    pilha_inverter(p1);
+
+    pilha_imprimir(p1);
+
+    printf("\nEmpilhar todos:\n");
+
+    int vet[4] = {60, 70, 80, 90};
+
+    pilha_empilharTodos(p1, vet, 4);
+
+    pilha_imprimir(p1);
+
+    printf("\nPilha to string:\n");
+
+    char str[100];
+
+    pilha_toString(p1, &str);
+
+    printf("%s", str);
 
     return 0;
 }
