@@ -171,14 +171,15 @@ int pilha_tamanho(Pilha *p)
 Pilha *pilha_clone(Pilha *p)
 {
 
-    Pilha *aux;
-    aux = (Pilha *)malloc(sizeof(Pilha));
-    aux->qtdeElementos = p->qtdeElementos;
-    aux->topo = p->topo;
 
-    return aux;
+
 }
-void pilha_inverter(Pilha *p);
+void pilha_inverter(Pilha *p)
+{
+    
+
+    
+}
 bool pilha_empilharTodos(Pilha *p, TipoElemento *vetor, int tamVetor)
 {
 
