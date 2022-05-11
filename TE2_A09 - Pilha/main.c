@@ -77,6 +77,55 @@ int main()
 
     pilha_imprimir(p1);
 
+    bool a;
+
+    a = pilha_vazia(p1);
+
+    if (a == true)
+    {
+        printf("\nPilha vazia!\n");
+    }
+    else
+    {
+        printf("\nA pilha esta ocupada.\n");
+    }
+
+    int vet[4] = {60, 70, 80, 90};
+
+    pilha_empilharTodos(p1, vet, 4);
+
+    pilha_imprimir(p1);
+
+    int topo;
+    pilha_topo(p1, &topo);
+
+    printf("\ntopo: %i\n", topo);
+
+    int desempilhado;
+
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+    pilha_desempilhar(p1, &desempilhado);
+    printf("%i\n", desempilhado);
+
+    pilha_imprimir(p1);
+
     pilha_destruir((p1));
     printf(" opa \n\n\n\n %u", &p1);
 

@@ -80,9 +80,71 @@ bool pilha_empilhar(Pilha *p, TipoElemento elemento)
 
     return true;
 }
-bool pilha_desempilhar(Pilha *p, TipoElemento *saida);
-bool pilha_topo(Pilha *p, TipoElemento *saida);
-bool pilha_vazia(Pilha *p);
+bool pilha_desempilhar(Pilha *p, TipoElemento *saida)
+{
+
+    No *aux = p->topo;
+    No *aux2 = p->topo;
+
+    // while (aux->prox != NULL)
+    // {
+
+    //     if (aux->prox != NULL)
+    //     {
+    //         aux2 = aux->prox;
+    //     }
+
+    //     aux = aux->prox;
+    // }
+
+    for (int i = 0; i < p->qtdeElementos - 2; i++)
+    {
+        aux2 = aux2->prox;
+    }
+
+    for (int i = 0; i < p->qtdeElementos; i++)
+    {
+
+        if (aux->prox != NULL)
+        {
+            aux = aux->prox;
+        }
+    }
+
+    *saida = aux->dado;
+
+    aux2->prox = NULL;
+    free(aux);
+    aux = NULL;
+
+    p->qtdeElementos--;
+
+    return true;
+}
+bool pilha_topo(Pilha *p, TipoElemento *saida)
+{
+
+    if (p == NULL)
+    {
+        return false;
+    }
+
+    *saida = p->topo->dado;
+
+    return true;
+}
+bool pilha_vazia(Pilha *p)
+{
+
+    if (p->topo == NULL)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 void pilha_imprimir(Pilha *p)
 {
 
@@ -111,5 +173,19 @@ Pilha *pilha_clone(Pilha *p)
     return aux;
 }
 void pilha_inverter(Pilha *p);
-bool pilha_empilharTodos(Pilha *p, TipoElemento *vetor, int tamVetor);
+bool pilha_empilharTodos(Pilha *p, TipoElemento *vetor, int tamVetor)
+{
+
+    if (p == NULL)
+    {
+        return false;
+    }
+
+    for (int i = 0; i < tamVetor; i++)
+    {
+        pilha_empilhar(p, vetor[i]);
+    }
+
+    return true;
+}
 bool pilha_toString(Pilha *f, char *str);
