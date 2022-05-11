@@ -36,10 +36,11 @@ void pilha_destruir(Pilha **endereco)
     No *node = (*endereco)->topo;
     No *aux = node;
 
-    while (aux->prox != NULL)
+    int b;
+
+    for (int i = 0; i < (*endereco)->qtdeElementos; i++)
     {
-        aux = aux->prox;
-        free(aux);
+        pilha_desempilhar((*endereco), &b);
     }
 
     free((*endereco)->topo);
@@ -86,16 +87,16 @@ bool pilha_desempilhar(Pilha *p, TipoElemento *saida)
     No *aux = p->topo;
     No *aux2 = p->topo;
 
-    // while (aux->prox != NULL)
-    // {
+    if (p->topo->prox == NULL)
+    {
+        *saida = p->topo->dado;
 
-    //     if (aux->prox != NULL)
-    //     {
-    //         aux2 = aux->prox;
-    //     }
+        free(p->topo);
+        p->topo = NULL;
+        p->qtdeElementos = 0;
 
-    //     aux = aux->prox;
-    // }
+        return false;
+    }
 
     for (int i = 0; i < p->qtdeElementos - 2; i++)
     {
@@ -151,6 +152,11 @@ void pilha_imprimir(Pilha *p)
     printf("hmm\n");
 
     No *aux = p->topo;
+
+    if (p->qtdeElementos <= 0)
+    {
+        printf("Não ha nada pra imprimir.\n");
+    }
 
     for (int i = 0; i < p->qtdeElementos; i++)
     {

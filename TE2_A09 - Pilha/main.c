@@ -113,21 +113,8 @@ int main()
     printf("%i\n", desempilhado);
     pilha_desempilhar(p1, &desempilhado);
     printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
 
     pilha_imprimir(p1);
-
-    pilha_destruir((p1));
-    printf(" opa \n\n\n\n %u", &p1);
 
     return 0;
 }
