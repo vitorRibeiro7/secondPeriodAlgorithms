@@ -126,16 +126,17 @@ void fila_imprimir(Fila *f)
 }
 Fila *fila_clone(Fila *f)
 {
-    Fila *clone;
-    clone = fila_criar;
+    Fila *clone = fila_criar();
 
     No *aux = f->inicio;
 
-    for (int i = 0; i < f->qtde; i++)
+    while (aux != NULL)
     {
         fila_inserir(clone, aux->dado);
         aux = aux->prox;
     }
+
+    return clone;
 }
 bool fila_toString(Fila *f, char *str)
 {

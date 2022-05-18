@@ -55,23 +55,26 @@ int main()
     Fila *f1 = fila_criar();
     fila_inserirTodos(f1, vetor, 12);
 
-    fila_imprimir(f1);
     fila_toString(f1, &str);
 
     printf("%s", str);
 
     Fila *f2 = fila_clone(f1);
-    fila_imprimir(f2);
+    fila_toString(f1, &str);
 
-    // fila_remover(f2, &elemento);
-    // fila_remover(f2, &elemento);
-    // fila_remover(f2, &elemento);
-    // fila_inserir(f2, 20);
-    // fila_inserir(f2, 21);
-    // fila_inserir(f2, 22);
+    printf("%s", str);
 
-    // fila_toString(f2, &str);
+    fila_remover(f2, &elemento);
+    fila_remover(f2, &elemento);
+    fila_remover(f2, &elemento);
+    fila_inserir(f2, 20);
+    fila_inserir(f2, 21);
+    fila_inserir(f2, 22);
 
-    // fila_destruir(&f1);
-    // fila_destruir(&f2);
+    fila_toString(f1, &str);
+
+    printf("%s", str);
+
+    fila_destruir(&f1);
+    fila_destruir(&f2);
 }

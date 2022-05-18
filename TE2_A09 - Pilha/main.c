@@ -105,14 +105,6 @@ int main()
 
     pilha_desempilhar(p1, &desempilhado);
     printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
-    pilha_desempilhar(p1, &desempilhado);
-    printf("%i\n", desempilhado);
 
     pilha_imprimir(p1);
 

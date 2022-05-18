@@ -70,7 +70,7 @@ bool pilha_topo(Pilha *p, TipoElemento *saida)
 }
 bool pilha_vazia(Pilha *p)
 {
-    if (!p->vetor[0])
+    if (p->qtdeElementos == 0)
     {
         return true;
     }
@@ -123,7 +123,6 @@ void pilha_inverter(Pilha *p)
 }
 bool pilha_empilharTodos(Pilha *p, TipoElemento *vetor, int tamVetor)
 {
-
     for (int i = 0; i < tamVetor; i++)
     {
         pilha_empilhar(p, vetor[i]);
