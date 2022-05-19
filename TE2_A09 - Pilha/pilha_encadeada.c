@@ -187,6 +187,37 @@ Pilha *pilha_clone(Pilha *p)
 }
 void pilha_inverter(Pilha *p)
 {
+
+    No *aux = p->topo;
+    Pilha *inverse = pilha_criar();
+
+    int tam = p->qtdeElementos;
+    int i = 0;
+
+    int *vet = (int *)calloc(tam, sizeof(int));
+
+    while (aux != NULL)
+    {
+        vet[i] = aux->dado;
+        aux = aux->prox;
+        i++;
+    }
+
+    for (int i = 0; i < p->qtdeElementos; i++)
+    {
+        int a;
+        pilha_desempilhar(p, &a);
+    }
+
+    int j = p->qtdeElementos - 1;
+
+    for (int i = 0; i < p->qtdeElementos; i++)
+    {
+        pilha_empilhar(inverse, vet[j]);
+        j--;
+    }
+
+    p->topo = inverse->topo;
 }
 bool pilha_empilharTodos(Pilha *p, TipoElemento *vetor, int tamVetor)
 {

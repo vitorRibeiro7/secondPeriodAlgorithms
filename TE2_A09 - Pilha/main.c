@@ -116,5 +116,11 @@ int main()
 
     pilha_imprimir(p2);
 
+    printf("\npilha 1 inversa:\n");
+
+    pilha_inverter(p1);
+
+    pilha_imprimir(p1);
+
     return 0;
 }
