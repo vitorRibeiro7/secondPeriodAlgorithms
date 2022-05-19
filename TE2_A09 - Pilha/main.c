@@ -106,7 +106,15 @@ int main()
     pilha_desempilhar(p1, &desempilhado);
     printf("%i\n", desempilhado);
 
+    Pilha *p2 = pilha_clone(p1);
+
+    printf("\npilha 1:\n");
+
     pilha_imprimir(p1);
+
+    printf("\npilha 2:\n");
+
+    pilha_imprimir(p2);
 
     return 0;
 }
