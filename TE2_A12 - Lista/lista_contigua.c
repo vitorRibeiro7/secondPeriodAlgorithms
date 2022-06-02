@@ -52,8 +52,40 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao)
 
 	if (l->vetor == NULL)
 	{
-		/* code */
+		return false;
 	}
+
+	int firstSize = (l->qtde - posicao) - l->qtde;
+	int secondSize = l->qtde - posicao;
+
+	int *first = (int *)calloc(firstSize, sizeof(int));
+	int *second = (int *)calloc(secondSize, sizeof(int));
+
+	int *new = (int *)calloc(l->qtde, sizeof(int));
+
+	for (int i = 0; i < firstSize; i++)
+	{
+		first[i] = l->vetor[i];
+	}
+
+	for (int i = firstSize; i < secondSize; i++)
+	{
+		second[i] = l->vetor[i];
+	}
+
+	for (int i = 0; i < firstSize; i++)
+	{
+		new[i] = first[i];
+	}
+
+	new[posicao] = elemento;
+
+	for (int i = secondSize; i < secondSize; i++)
+	{
+		new[i] = second[i];
+	}
+
+	return true;
 }
 
 bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco);
