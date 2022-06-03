@@ -147,6 +147,14 @@ int lista_removerElemento(Lista *l, TipoElemento elemento) // OK
 
 bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
 {
+	if (l->vetor == NULL)
+	{
+		return false;
+	}
+
+	l->vetor[posicao] = novoElemento;
+
+	return true;
 }
 int lista_posicao(Lista *l, TipoElemento elemento);
 bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
