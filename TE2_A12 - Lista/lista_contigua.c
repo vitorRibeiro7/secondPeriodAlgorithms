@@ -171,7 +171,29 @@ int lista_posicao(Lista *l, TipoElemento elemento)
 
 	return pos;
 }
-bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
+bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco)
+{
+
+	if (l->vetor == NULL)
+	{
+		return false;
+	}
+
+	if (posicao > l->qtde)
+	{
+		return false;
+	}
+
+	for (int i = 0; i < l->qtde; i++)
+	{
+		if (i == posicao)
+		{
+			*endereco = i;
+		}
+	}
+
+	return true;
+}
 
 int lista_tamanho(Lista *l);
 bool lista_vazia(Lista *l);
