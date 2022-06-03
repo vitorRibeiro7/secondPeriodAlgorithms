@@ -56,7 +56,7 @@ bool fila_inserir(Fila *f, TipoElemento elemento)
 	if (f->qtdeElementos > 0)
 	{
 		f->fim++;
-	}
+		}
 
 	return true;
 }
