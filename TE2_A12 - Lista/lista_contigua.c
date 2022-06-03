@@ -216,7 +216,35 @@ bool lista_vazia(Lista *l)
 		return false;
 	}
 }
-bool lista_toString(Lista *l, char *str);
+bool lista_toString(Lista *l, char *str)
+{
+
+	if (l->vetor == NULL)
+	{
+		return false;
+	}
+
+	str[0] = '\0';
+
+	strcat(str, "["); // insere na string o valor passado
+
+	for (int i = 0; i < l->qtde; i++)
+	{
+		char casting[50];
+
+		sprintf(casting, "%d", l->vetor[i]);
+		strcat(str, casting);
+
+		if (i < (l->qtde) - 1)
+		{
+			strcat(str, ",");
+		}
+	}
+
+	strcat(str, "]\n");
+
+	return true;
+}
 
 /**************************************
  * AUXILIARES
