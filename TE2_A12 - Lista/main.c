@@ -17,12 +17,32 @@ int main()
         lista_anexar(l, 80);
         lista_inserir(l, 70, 6);
 
+        lista_imprimir(l);
+
+        printf("\n");
+
         int removido;
         lista_removerPosicao(l, 1, &removido);
-        printf("%i", removido);
-        lista_removerPosicao(l, 4, &removido);
-        printf("%i", removido);
+        printf("removido: %i", removido);
+        printf("\n");
+        lista_imprimir(l);
+        lista_removerPosicao(l, 6, &removido);
+        printf("removido: %i", removido);
+        printf("\n");
+        lista_imprimir(l);
 
+        int retorno;
+        retorno = lista_removerElemento(l, 40);
+        if (retorno == 0)
+        {
+                printf("\nO elemento não existe!");
+        }
+        else
+        {
+                printf("\nElemento removido!");
+        }
+
+        printf("\n");
         lista_imprimir(l);
 
         return 0;

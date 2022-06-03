@@ -83,7 +83,7 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao) // OK
 	return true;
 }
 
-bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco)
+bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco) // OK
 {
 
 	if (l->vetor == NULL)
@@ -120,9 +120,34 @@ bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco)
 
 	return true;
 }
-int lista_removerElemento(Lista *l, TipoElemento elemento);
+int lista_removerElemento(Lista *l, TipoElemento elemento) // OK
+{
 
-bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento);
+	int pos = -1;
+
+	printf("\nRemocao solicitada: %i", elemento);
+
+	for (int i = 0; i < l->qtde; i++)
+	{
+		if (l->vetor[i] == elemento)
+		{
+			pos = i;
+		}
+	}
+
+	if (pos == -1)
+	{
+		return 0;
+	}
+
+	lista_removerPosicao(l, pos, &elemento);
+
+	return elemento;
+}
+
+bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
+{
+}
 int lista_posicao(Lista *l, TipoElemento elemento);
 bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
 
@@ -130,18 +155,22 @@ int lista_tamanho(Lista *l);
 bool lista_vazia(Lista *l);
 bool lista_toString(Lista *l, char *str);
 
-void lista_imprimir(Lista *l)
+/**************************************
+ * AUXILIARES
+ **************************************/
+void lista_imprimir(Lista *l) // OK
 {
 
 	printf("[");
-	for (int i = 0; i < l->tam; i++)
+	for (int i = 0; i < l->qtde; i++)
 	{
 		printf("%i", l->vetor[i]);
 
-		if (i < l->tam - 1)
+		if (i < l->qtde - 1)
 		{
 			printf(", ");
 		}
 	}
 	printf("]");
+	printf("\n");
 }
