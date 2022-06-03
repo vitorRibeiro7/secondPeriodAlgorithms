@@ -1,7 +1,7 @@
 #include "lista.h"
 #include <string.h>
 
-#define TAM_INICIAL 20
+#define TAM_INICIAL 10
 
 /**************************************
  * DADOS
@@ -16,7 +16,7 @@ struct lista
 /**************************************
  * IMPLEMENTAÇÃO
  **************************************/
-Lista *lista_criar()
+Lista *lista_criar() // OK
 {
 	Lista *new = (Lista *)malloc(sizeof(Lista));
 	new->vetor = (int *)calloc(TAM_INICIAL, sizeof(int));
@@ -25,7 +25,7 @@ Lista *lista_criar()
 
 	return new;
 }
-void lista_destruir(Lista **endereco)
+void lista_destruir(Lista **endereco) // OK
 {
 
 	Lista *aux = *endereco;
@@ -33,7 +33,7 @@ void lista_destruir(Lista **endereco)
 	free(aux);
 }
 
-bool lista_anexar(Lista *l, TipoElemento elemento)
+bool lista_anexar(Lista *l, TipoElemento elemento) // OK
 {
 
 	if (l->vetor == NULL)
@@ -47,7 +47,7 @@ bool lista_anexar(Lista *l, TipoElemento elemento)
 
 	return true;
 }
-bool lista_inserir(Lista *l, TipoElemento elemento, int posicao)
+bool lista_inserir(Lista *l, TipoElemento elemento, int posicao) // OK
 {
 
 	if (l->vetor == NULL)
@@ -86,13 +86,37 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao)
 bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco)
 {
 
-	if (l->vetor = NULL)
+	if (l->vetor == NULL)
 	{
 		return false;
 	}
 
 	*endereco = l->vetor[posicao];
-	l->vetor[posicao] = 0;
+	l->vetor[posicao] = NULL;
+
+	int *v2 = (int *)calloc(l->tam, sizeof(int));
+
+	int aux;
+
+	for (int i = 0; i < l->qtde; i++)
+	{
+		if (i < posicao)
+		{
+			v2[i] = l->vetor[i];
+		}
+		if (i == posicao)
+		{
+			v2[i] = l->vetor[i + 1];
+		}
+		if (i > posicao)
+		{
+			aux = l->vetor[i + 1];
+			v2[i] = aux;
+		}
+	}
+
+	l->vetor = v2;
+	l->qtde--;
 
 	return true;
 }
