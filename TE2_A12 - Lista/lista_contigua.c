@@ -1,17 +1,17 @@
 #include "lista.h"
 #include <string.h>
 
-#define TAM_INICIAL 10
+#define TAM_INICIAL 20
 
 /**************************************
  * DADOS
  **************************************/
-typedef struct
+struct lista
 {
 	TipoElemento *vetor;
 	int tam;
 	int qtde;
-} Lista;
+};
 
 /**************************************
  * IMPLEMENTAÇÃO
@@ -55,40 +55,47 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao)
 		return false;
 	}
 
-	int firstSize = (l->qtde - posicao) - l->qtde;
-	int secondSize = l->qtde - posicao;
+	int *v2 = (int *)calloc(l->tam, sizeof(int));
 
-	int *first = (int *)calloc(firstSize, sizeof(int));
-	int *second = (int *)calloc(secondSize, sizeof(int));
+	int aux;
 
-	int *new = (int *)calloc(l->qtde, sizeof(int));
-
-	for (int i = 0; i < firstSize; i++)
+	for (int i = 0; i < l->tam; i++)
 	{
-		first[i] = l->vetor[i];
+		if (i < posicao)
+		{
+			v2[i] = l->vetor[i];
+		}
+		if (i == posicao)
+		{
+			aux = l->vetor[i];
+			v2[i] = elemento;
+		}
+		if (i > posicao)
+		{
+			v2[i] = aux;
+			aux = l->vetor[i];
+		}
 	}
 
-	for (int i = firstSize; i < secondSize; i++)
-	{
-		second[i] = l->vetor[i];
-	}
-
-	for (int i = 0; i < firstSize; i++)
-	{
-		new[i] = first[i];
-	}
-
-	new[posicao] = elemento;
-
-	for (int i = secondSize; i < secondSize; i++)
-	{
-		new[i] = second[i];
-	}
+	l->vetor = v2;
+	l->qtde++;
 
 	return true;
 }
 
-bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco);
+bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco)
+{
+
+	if (l->vetor = NULL)
+	{
+		return false;
+	}
+
+	*endereco = l->vetor[posicao];
+	l->vetor[posicao] = 0;
+
+	return true;
+}
 int lista_removerElemento(Lista *l, TipoElemento elemento);
 
 bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento);
@@ -98,3 +105,19 @@ bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
 int lista_tamanho(Lista *l);
 bool lista_vazia(Lista *l);
 bool lista_toString(Lista *l, char *str);
+
+void lista_imprimir(Lista *l)
+{
+
+	printf("[");
+	for (int i = 0; i < l->tam; i++)
+	{
+		printf("%i", l->vetor[i]);
+
+		if (i < l->tam - 1)
+		{
+			printf(", ");
+		}
+	}
+	printf("]");
+}

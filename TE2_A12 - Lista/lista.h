@@ -32,5 +32,6 @@ bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
 int lista_tamanho(Lista *l);
 bool lista_vazia(Lista *l);
 bool lista_toString(Lista *l, char *str);
+void lista_imprimir(Lista *l);
 
 #endif
