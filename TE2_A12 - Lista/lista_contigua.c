@@ -156,7 +156,21 @@ bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
 
 	return true;
 }
-int lista_posicao(Lista *l, TipoElemento elemento);
+int lista_posicao(Lista *l, TipoElemento elemento)
+{
+
+	int pos = -1;
+
+	for (int i = 0; i < l->qtde; i++)
+	{
+		if (l->vetor[i] == elemento)
+		{
+			pos = i;
+		}
+	}
+
+	return pos;
+}
 bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
 
 int lista_tamanho(Lista *l);
