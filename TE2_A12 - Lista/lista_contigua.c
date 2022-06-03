@@ -195,8 +195,27 @@ bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco)
 	return true;
 }
 
-int lista_tamanho(Lista *l);
-bool lista_vazia(Lista *l);
+int lista_tamanho(Lista *l)
+{
+	return l->qtde;
+}
+
+bool lista_vazia(Lista *l)
+{
+	if (l->vetor == NULL)
+	{
+		return false;
+	}
+
+	if (l->qtde == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
 bool lista_toString(Lista *l, char *str);
 
 /**************************************
