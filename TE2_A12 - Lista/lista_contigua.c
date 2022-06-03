@@ -145,7 +145,7 @@ int lista_removerElemento(Lista *l, TipoElemento elemento) // OK
 	return elemento;
 }
 
-bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
+bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento) // OK
 {
 	if (l->vetor == NULL)
 	{
@@ -156,7 +156,7 @@ bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
 
 	return true;
 }
-int lista_posicao(Lista *l, TipoElemento elemento)
+int lista_posicao(Lista *l, TipoElemento elemento) // OK
 {
 
 	int pos = -1;
@@ -171,7 +171,7 @@ int lista_posicao(Lista *l, TipoElemento elemento)
 
 	return pos;
 }
-bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco)
+bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco) // OK
 {
 
 	if (l->vetor == NULL)
@@ -195,12 +195,12 @@ bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco)
 	return true;
 }
 
-int lista_tamanho(Lista *l)
+int lista_tamanho(Lista *l) // OK
 {
 	return l->qtde;
 }
 
-bool lista_vazia(Lista *l)
+bool lista_vazia(Lista *l) // OK
 {
 	if (l->vetor == NULL)
 	{
@@ -216,7 +216,7 @@ bool lista_vazia(Lista *l)
 		return false;
 	}
 }
-bool lista_toString(Lista *l, char *str)
+bool lista_toString(Lista *l, char *str) // OK
 {
 
 	if (l->vetor == NULL)
