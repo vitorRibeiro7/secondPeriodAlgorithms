@@ -12,6 +12,7 @@ typedef int TipoElemento;
  * DADOS
  **************************************/
 typedef struct lista Lista;
+typedef struct no No;
 
 /**************************************
  * PROTÓTIPOS
