@@ -8,16 +8,16 @@ int main()
 
         Lista *l = lista_criar();
 
-        // lista_anexar(l, 10);
-        // lista_anexar(l, 20);
-        // lista_anexar(l, 40);
-        // lista_inserir(l, 30, 2);
-        // lista_anexar(l, 50);
-        // lista_anexar(l, 60);
-        // lista_anexar(l, 80);
-        // lista_inserir(l, 70, 6);
+        lista_anexar(l, 10);
+        lista_anexar(l, 20);
+        lista_anexar(l, 40);
+        lista_inserir(l, 30, 2);
+        lista_anexar(l, 50);
+        lista_anexar(l, 60);
+        lista_anexar(l, 80);
+        lista_inserir(l, 70, 6);
 
-        // lista_imprimir(l);
+        lista_imprimir(l);
 
         // printf("\n");
 
