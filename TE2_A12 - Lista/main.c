@@ -12,10 +12,15 @@ int main()
         lista_anexar(l, 20);
         lista_anexar(l, 40);
         lista_inserir(l, 30, 2);
-        lista_anexar(l, 50);
+        lista_anexar(l, 100);
         lista_anexar(l, 60);
         lista_anexar(l, 80);
         lista_inserir(l, 70, 6);
+
+        lista_imprimir(l);
+        printf("\n");
+
+        lista_substituir(l, 4, 50);
 
         lista_imprimir(l);
 
