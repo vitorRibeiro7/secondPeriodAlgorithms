@@ -31,12 +31,20 @@ int main()
         pos = lista_posicao(l, elemento);
         if (pos != -1)
         {
-                printf("Elemento %i encontrado na posicao %i", elemento, pos);
+                printf("Elemento %i encontrado na posicao %i (busca a posicao do elemento)", elemento, pos);
         }
         else
         {
                 printf("Elemento não encontrado.");
         }
+
+        printf("\n");
+        printf("\n");
+
+        int elem;
+        int posic = 3; // POSICAO A SER EXTRAIDA DO DADO
+        lista_buscar(l, posic, &elem);
+        printf("Elemento %i encontrado na posicao %i (busca o elemento na posicao)", elem, posic);
 
         // printf("\n");
 

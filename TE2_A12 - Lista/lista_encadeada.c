@@ -157,6 +157,26 @@ int lista_posicao(Lista *l, TipoElemento elemento) // OK
 }
 bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco)
 {
+    if (l == NULL || posicao > l->qtde)
+    {
+        return false;
+    }
+
+    No *aux = (No *)malloc(sizeof(No));
+    aux = l->inicio;
+
+    for (int i = 0; i < l->qtde; i++)
+    {
+
+        if (i == posicao)
+        {
+            *endereco = aux->dado;
+        }
+
+        aux = aux->prox;
+    }
+
+    return true;
 }
 
 int lista_tamanho(Lista *l);
