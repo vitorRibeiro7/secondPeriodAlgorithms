@@ -107,7 +107,7 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao) // OK
 bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco);
 int lista_removerElemento(Lista *l, TipoElemento elemento);
 
-bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
+bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento) // OK
 {
 
     if (l == NULL)
@@ -130,8 +130,34 @@ bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
 
     return true;
 }
-int lista_posicao(Lista *l, TipoElemento elemento);
-bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
+int lista_posicao(Lista *l, TipoElemento elemento) // OK
+{
+
+    if (l == NULL)
+    {
+        return false;
+    }
+
+    No *aux = (No *)malloc(sizeof(No));
+    aux = l->inicio;
+
+    TipoElemento pos = -1;
+
+    for (int i = 0; i < l->qtde; i++)
+    {
+        if (aux->dado == elemento)
+        {
+            pos = i;
+        }
+
+        aux = aux->prox;
+    }
+
+    return pos;
+}
+bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco)
+{
+}
 
 int lista_tamanho(Lista *l);
 bool lista_vazia(Lista *l);

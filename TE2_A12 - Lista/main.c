@@ -16,13 +16,27 @@ int main()
         lista_anexar(l, 60);
         lista_anexar(l, 80);
         lista_inserir(l, 70, 6);
-
         lista_imprimir(l);
+        printf(" substituido valor na posicao");
         printf("\n");
 
         lista_substituir(l, 4, 50);
-
         lista_imprimir(l);
+        printf(" ----------------------------'");
+        printf("\n");
+        printf("\n");
+
+        int elemento = 60; // ELEMENTO A SER PROCURADO
+        int pos;
+        pos = lista_posicao(l, elemento);
+        if (pos != -1)
+        {
+                printf("Elemento %i encontrado na posicao %i", elemento, pos);
+        }
+        else
+        {
+                printf("Elemento não encontrado.");
+        }
 
         // printf("\n");
 
