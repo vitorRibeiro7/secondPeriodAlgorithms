@@ -273,7 +273,7 @@ bool lista_vazia(Lista *l) // OK
         return false;
     }
 }
-bool lista_toString(Lista *l, char *str)
+bool lista_toString(Lista *l, char *str) // OK
 {
 
     if (l == NULL)
