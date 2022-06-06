@@ -104,8 +104,87 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao) // OK
     l->qtde++;
 }
 
-bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco);
-int lista_removerElemento(Lista *l, TipoElemento elemento);
+bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco) // OK
+{
+
+    if (l == NULL)
+    {
+        return false;
+    }
+
+    No *aux = l->inicio;
+    No *auxProx;
+    No *auxAnt;
+
+    for (int i = 0; i < l->qtde; i++)
+    {
+        if (i == posicao)
+        {
+
+            *endereco = aux->dado;
+
+            if (i > 0)
+            {
+                auxAnt = aux->ant;
+            }
+            if (aux->prox != NULL)
+            {
+                auxProx = aux->prox;
+            }
+
+            if (i == 0)
+            {
+                free(aux);
+                auxProx->ant = NULL;
+                l->inicio = auxProx;
+            }
+            else if (aux->prox == NULL)
+            {
+                auxAnt->prox = NULL;
+                free(aux);
+                l->fim = auxAnt;
+            }
+            else
+            {
+                auxAnt->prox = auxProx;
+                auxProx->ant = auxAnt;
+            }
+
+            l->qtde--;
+
+            return true;
+        }
+
+        aux = aux->prox;
+    }
+
+    // l->qtde--;
+
+    return true;
+}
+int lista_removerElemento(Lista *l, TipoElemento elemento)
+{
+
+    No *aux = l->inicio;
+    int pos = -1;
+
+    for (int i = 0; i < l->qtde; i++)
+    {
+        if (aux->dado == elemento)
+        {
+            lista_removerPosicao(l, i, &pos);
+        }
+
+        aux = aux->prox;
+    }
+
+    if (pos == -1)
+    {
+        return 0;
+    }
+
+    return pos;
+}
 
 bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento) // OK
 {
@@ -194,7 +273,39 @@ bool lista_vazia(Lista *l) // OK
         return false;
     }
 }
-bool lista_toString(Lista *l, char *str);
+bool lista_toString(Lista *l, char *str)
+{
+
+    if (l == NULL)
+    {
+        return false;
+    }
+
+    No *aux = l->inicio;
+
+    str[0] = '\0';
+
+    strcat(str, "["); // insere na string o valor passado
+
+    for (int i = 0; i < l->qtde; i++)
+    {
+        char casting[50];
+
+        sprintf(casting, "%d", aux->dado);
+        strcat(str, casting);
+
+        if (i < (l->qtde) - 1)
+        {
+            strcat(str, ",");
+        }
+
+        aux = aux->prox;
+    }
+
+    strcat(str, "]\n");
+
+    return true;
+}
 
 /**************************************
  * AUXILIARES
