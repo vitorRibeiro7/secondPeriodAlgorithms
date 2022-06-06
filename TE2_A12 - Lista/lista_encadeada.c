@@ -122,6 +122,19 @@ bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco) // OK
     No *auxProx;
     No *auxAnt;
 
+    if (l->qtde == 1)
+    {
+        aux->ant = NULL;
+        aux->prox = NULL;
+
+        *endereco = aux->dado;
+
+        l->qtde--;
+        free(aux);
+
+        return true;
+    }
+
     for (int i = 0; i < l->qtde; i++)
     {
         if (i == posicao)
