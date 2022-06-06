@@ -49,13 +49,17 @@ int main()
         printf("\n");
 
         int removido;
-        lista_removerPosicao(l, 1, &removido);
-        lista_imprimir(l);
-        printf("removido: %i", removido);
+        if (lista_removerPosicao(l, 0, &removido))
+        {
+                lista_imprimir(l);
+                printf("removido: %i", removido);
+        }
         printf("\n");
-        lista_removerPosicao(l, 6, &removido);
-        lista_imprimir(l);
-        printf("removido: %i", removido);
+        if (lista_removerPosicao(l, 6, &removido))
+        {
+                lista_imprimir(l);
+                printf("removido: %i", removido);
+        }
         printf("\n");
 
         int retorno;

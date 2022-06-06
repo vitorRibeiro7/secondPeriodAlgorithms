@@ -112,12 +112,6 @@ bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco) // OK
         return false;
     }
 
-    if (posicao > l->qtde)
-    {
-        printf("\nPosição não indexada\n");
-        return false;
-    }
-
     No *aux = l->inicio;
     No *auxProx;
     No *auxAnt;
@@ -143,12 +137,6 @@ bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco) // OK
                 free(aux);
                 auxProx->ant = NULL;
                 l->inicio = auxProx;
-            }
-            else if ((posicao - l->qtde) == 0)
-            {
-                auxAnt->prox = NULL;
-                free(aux);
-                l->fim = auxAnt;
             }
             else if (aux->prox == NULL)
             {
