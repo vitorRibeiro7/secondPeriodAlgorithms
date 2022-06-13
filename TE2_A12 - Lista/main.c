@@ -25,17 +25,17 @@ int main()
         printf(" ----------------------------'");
         printf("\n");
 
-        // int elemento = 60; // ELEMENTO A SER PROCURADO
-        // int pos;
-        // pos = lista_posicao(l, elemento);
-        // if (pos != -1)
-        // {
-        //         printf("Elemento %i encontrado na posicao %i (busca a posicao do elemento)", elemento, pos);
-        // }
-        // else
-        // {
-        //         printf("Elemento não encontrado.");
-        // }
+        int elemento = 60; // ELEMENTO A SER PROCURADO
+        int pos;
+        pos = lista_posicao(l, elemento);
+        if (pos != -1)
+        {
+                printf("Elemento %i encontrado na posicao %i (busca a posicao do elemento)", elemento, pos);
+        }
+        else
+        {
+                printf("Elemento não encontrado.");
+        }
 
         // printf("\n");
         // printf("\n");
