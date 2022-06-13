@@ -75,10 +75,10 @@ int main()
         // printf("\n");
         // lista_imprimir(l);
 
-        // printf("\n\nTo string!\n");
-        // char str[] = "\n";
-        // lista_toString(l, &str);
-        // printf("%s", str);
+        printf("\n\nTo string!\n");
+        char str[] = "\n";
+        lista_toString(l, &str);
+        printf("%s", str);
 
         return 0;
 }
