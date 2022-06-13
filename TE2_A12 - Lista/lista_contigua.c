@@ -188,7 +188,7 @@ bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco) // OK
 	{
 		if (i == posicao)
 		{
-			*endereco = i;
+			*endereco = l->vetor[i];
 		}
 	}
 
