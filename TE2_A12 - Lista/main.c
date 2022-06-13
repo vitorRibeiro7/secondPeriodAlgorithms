@@ -45,35 +45,35 @@ int main()
         lista_buscar(l, posic, &elem);
         printf("Elemento %i encontrado na posicao %i (busca o elemento na posicao)", elem, posic);
 
-        // printf("\n");
+        printf("\n");
 
-        // int removido;
-        // if (lista_removerPosicao(l, 0, &removido))
-        // {
-        //         lista_imprimir(l);
-        //         printf("removido: %i", removido);
-        // }
-        // printf("\n");
-        // if (lista_removerPosicao(l, 6, &removido))
-        // {
-        //         lista_imprimir(l);
-        //         printf("removido: %i", removido);
-        // }
-        // printf("\n");
+        int removido;
+        if (lista_removerPosicao(l, 0, &removido))
+        {
+                lista_imprimir(l);
+                printf("removido: %i", removido);
+        }
+        printf("\n");
+        if (lista_removerPosicao(l, 6, &removido))
+        {
+                lista_imprimir(l);
+                printf("removido: %i", removido);
+        }
+        printf("\n");
 
-        // int retorno;
-        // retorno = lista_removerElemento(l, 40);
-        // if (retorno == 0)
-        // {
-        //         printf("\nO elemento não existe!");
-        // }
-        // else
-        // {
-        //         printf("\nElemento removido!");
-        // }
+        int retorno;
+        retorno = lista_removerElemento(l, 40);
+        if (retorno == 0)
+        {
+                printf("\nO elemento não existe!");
+        }
+        else
+        {
+                printf("\nElemento removido!");
+        }
 
-        // printf("\n");
-        // lista_imprimir(l);
+        printf("\n");
+        lista_imprimir(l);
 
         printf("\n\nTo string!\n");
         char str[] = "\n";

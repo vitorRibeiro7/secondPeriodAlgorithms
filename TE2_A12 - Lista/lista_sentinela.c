@@ -130,8 +130,89 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao)
     return true;
 }
 
-bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco);
-int lista_removerElemento(Lista *l, TipoElemento elemento);
+bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco)
+{
+    if (l == NULL)
+    {
+        return false;
+    }
+
+    No *sent = l->sentinela;
+
+    No *aux = l->sentinela;
+    aux = aux->prox;
+
+    if (l->qtde == 0)
+    {
+        *endereco = aux->dado;
+
+        free(aux);
+        sent->ant = sent;
+        sent->prox = sent;
+
+        l->qtde--;
+
+        return true;
+    }
+    else if (posicao == l->qtde)
+    {
+
+        aux = sent->ant;
+
+        sent->ant = aux->ant;
+        aux->ant->prox = sent;
+
+        *endereco = aux->dado;
+
+        free(aux);
+
+        l->qtde--;
+
+        return true;
+    }
+    else
+    {
+
+        aux = sent->prox;
+
+        for (int i = 0; i < posicao; i++)
+        {
+            aux = aux->prox;
+        }
+
+        aux->ant->prox = aux->prox;
+        aux->prox->ant = aux->ant;
+
+        *endereco = aux->dado;
+        free(aux);
+
+        l->qtde--;
+    }
+
+    return true;
+}
+int lista_removerElemento(Lista *l, TipoElemento elemento)
+{
+
+    No *sent = l->sentinela;
+
+    No *aux = l->sentinela;
+    aux = aux->prox;
+
+    int elem = 0;
+
+    for (int i = 0; i < l->qtde; i++)
+    {
+        if (aux->dado == elemento)
+        {
+            lista_removerPosicao(l, i, &elem);
+        }
+
+        aux = aux->prox;
+    }
+
+    return elem;
+}
 
 bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
 {
