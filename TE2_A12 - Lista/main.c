@@ -14,18 +14,16 @@ int main()
         lista_inserir(l, 30, 2);
         lista_anexar(l, 100);
         lista_anexar(l, 60);
-        lista_anexar(l, 80);
+        lista_anexar(l, 90);
         lista_inserir(l, 70, 6);
         lista_imprimir(l);
-        printf("\n");
+
         printf(" substituido valor na posicao");
         printf("\n");
-
-        // lista_substituir(l, 4, 50);
-        // lista_imprimir(l);
-        // printf(" ----------------------------'");
-        // printf("\n");
-        // printf("\n");
+        lista_substituir(l, 4, 50);
+        lista_imprimir(l);
+        printf(" ----------------------------'");
+        printf("\n");
 
         // int elemento = 60; // ELEMENTO A SER PROCURADO
         // int pos;

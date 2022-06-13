@@ -133,7 +133,30 @@ bool lista_inserir(Lista *l, TipoElemento elemento, int posicao)
 bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco);
 int lista_removerElemento(Lista *l, TipoElemento elemento);
 
-bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento);
+bool lista_substituir(Lista *l, int posicao, TipoElemento novoElemento)
+{
+    if (l == NULL)
+    {
+        return true;
+    }
+
+    No *aux = l->sentinela;
+    aux = aux->prox;
+
+    if (posicao == 0)
+    {
+        aux->dado = novoElemento;
+    }
+
+    for (int i = 0; i < posicao; i++)
+    {
+        aux = aux->prox;
+    }
+
+    aux->dado = novoElemento;
+
+    return true;
+}
 int lista_posicao(Lista *l, TipoElemento elemento);
 bool lista_buscar(Lista *l, int posicao, TipoElemento *endereco);
 
