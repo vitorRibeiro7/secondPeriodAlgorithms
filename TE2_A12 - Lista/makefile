@@ -8,6 +8,11 @@ encadeada:
 	gcc main.c lista_encadeada.o -o main
 	./main
 
+sentinela:
+	gcc -c lista_sentinela.c -o lista_sentinela.o
+	gcc main.c lista_sentinela.o -o main
+	./main
+
 clean:
 	rm *.o
 	rm main
