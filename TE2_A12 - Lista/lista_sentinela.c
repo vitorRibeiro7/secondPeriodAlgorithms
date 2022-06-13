@@ -84,7 +84,51 @@ bool lista_anexar(Lista *l, TipoElemento elemento)
 
     return true;
 }
-bool lista_inserir(Lista *l, TipoElemento elemento, int posicao);
+bool lista_inserir(Lista *l, TipoElemento elemento, int posicao)
+{
+
+    if (l == NULL)
+    {
+        return true;
+    }
+
+    No *node = (No *)malloc(sizeof(No));
+    node->ant = NULL;
+    node->prox = NULL;
+    node->dado = elemento;
+
+    No *sent = l->sentinela;
+
+    No *aux = l->sentinela;
+
+    if (posicao == 0)
+    {
+        aux->prox = node;
+        aux->ant = node;
+        node->prox = aux;
+        node->ant = aux;
+    }
+    else if (posicao == l->qtde)
+    {
+        lista_anexar(l, elemento);
+    }
+
+    aux = aux->prox;
+
+    for (int i = 0; i < posicao; i++)
+    {
+        aux = aux->prox;
+    }
+
+    node->ant = aux->ant;
+    aux->ant->prox = node;
+    aux->ant = node;
+    node->prox = aux;
+
+    l->qtde++;
+
+    return true;
+}
 
 bool lista_removerPosicao(Lista *l, int posicao, TipoElemento *endereco);
 int lista_removerElemento(Lista *l, TipoElemento elemento);
