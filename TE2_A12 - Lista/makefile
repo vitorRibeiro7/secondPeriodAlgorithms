@@ -15,4 +15,4 @@ sentinela:
 
 clean:
 	rm *.o
-	rm main
+	rm main.exe
