@@ -59,7 +59,7 @@ int main()
                 lista_imprimir(l);
                 printf("removido: %i", removido);
         }
-        printf("\n");
+        printf(" \n");
 
         int retorno;
         retorno = lista_removerElemento(l, 40);
