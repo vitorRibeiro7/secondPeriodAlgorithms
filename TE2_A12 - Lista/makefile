@@ -16,3 +16,5 @@ sentinela:
 clean:
 	rm *.o
 	rm main.exe
+
+	
