@@ -8,8 +8,8 @@
 
 typedef struct nosetor
 {
-    unsigned long inicio;
-    unsigned long fim;
+    long int inicio;
+    long int fim;
     struct nosetor *prox;
     struct nosetor *ant;
 } NoSetor;
@@ -29,9 +29,9 @@ typedef struct
     void *disco;
     NoSetor *livres;
     NoArquivo *arquivos;
-    unsigned long tamDisco;
-    unsigned long espacoLivre;
-    unsigned long qtdeArquivos;
+    long int tamDisco;
+    long int espacoLivre;
+    long int qtdeArquivos;
 } Disco;
 
 // PROTÓTIPOS DAS FUNÇÕES
