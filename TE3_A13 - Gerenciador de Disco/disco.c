@@ -2,42 +2,10 @@
 #include <string.h>
 
 /**************************************
- * DADOS
- **************************************/
-
-typedef struct nosetor
-{
-    unsigned long inicio;
-    unsigned long fim;
-    struct nosetor *prox;
-    struct nosetor *ant;
-} NoSetor;
-
-typedef struct noarquivo
-{
-    char nome[40];
-    unsigned long tam;
-    NoSetor *setores;
-    struct noarquivo *prox;
-    struct noarquivo *ant;
-} NoArquivo;
-
-typedef struct
-{
-    char nome[40];
-    void *disco;
-    NoSetor *livres;
-    NoArquivo *arquivos;
-    unsigned long tamDisco;
-    unsigned long espacoLivre;
-    unsigned long qtdeArquivos;
-} Disco;
-
-/**************************************
  * IMPLEMENTAÇÃO
  **************************************/
 
-Disco *disco_cria(char *nome, unsigned long tamanho)
+Disco *disco_cria(char *nome, long int tamanho)
 {
 
     // ---------------------- Disco
@@ -46,7 +14,7 @@ Disco *disco_cria(char *nome, unsigned long tamanho)
 
     // ---------------------- Vetor Disco
 
-    int *vetorDisco = (int *)calloc(tamanho, sizeof(int));
+    void *vetorDisco = (void *)calloc(tamanho, sizeof(void));
     new->disco = vetorDisco; // new disco
 
     // ----------------------- livres
@@ -63,6 +31,7 @@ Disco *disco_cria(char *nome, unsigned long tamanho)
     firstLivres->ant = sentinelaLivres;
 
     sentinelaLivres->ant = firstLivres;
+    sentinelaLivres->prox = firstLivres;
 
     new->livres = sentinelaLivres; // new livres
 
@@ -76,19 +45,16 @@ Disco *disco_cria(char *nome, unsigned long tamanho)
 
     //----------------------- Disco - Paramentros
 
-    strcpy(new->nome, "discoUm"); // new nome
-    new->tamDisco = tamanho;      // new tamanho Disco
-    new->espacoLivre = tamanho;   // new Espaço livre
-    new->qtdeArquivos = 0;        // new quantidade arquivos
+    strcpy(new->nome, nome);    // new nome
+    new->tamDisco = tamanho;    // new tamanho Disco
+    new->espacoLivre = tamanho; // new Espaço livre
+    new->qtdeArquivos = 0;      // new quantidade arquivos
+
+    return new;
 }
 
 bool disco_grava(Disco *d, char *arquivo)
 {
-
-    if (d == NULL)
-    {
-        return false;
-    }
 
     FILE *arqOrigem;
     long int arqCopiado = 0;
@@ -107,7 +73,7 @@ bool disco_grava(Disco *d, char *arquivo)
         return false;
     }
 
-    long int tamArquivoOrigem = descobreTamanho(arqOrigem);
+    long int tamArquivoOrigem = catchSize(arqOrigem);
 
     void *buffer = (void *)calloc(tamArquivoOrigem, sizeof(void));
 
@@ -142,7 +108,7 @@ bool disco_grava(Disco *d, char *arquivo)
     while (arqCopiado < tamArquivoOrigem)
     {
 
-        segmentoLivre = procuraEspacoLivre(arqRestante, d);
+        segmentoLivre = freeSpace(arqRestante, d);
 
         espacoLivre = (segmentoLivre->fim - segmentoLivre->inicio);
 
@@ -165,14 +131,88 @@ bool disco_grava(Disco *d, char *arquivo)
 
 bool disco_remove(Disco *d, char *nome)
 {
+    NoArquivo *aux = d->arquivos->prox;
+    NoSetor *livres = d->livres;
+
+    while (aux != d->arquivos)
+    {
+        if (strcmp(nome, aux->nome) == 0)
+        {
+            break;
+        }
+        aux = aux->prox;
+    }
+
+    aux->ant->prox = aux->prox;
+    aux->prox->ant = aux->ant;
+
+    aux->setores->prox->ant = livres->ant;
+    aux->setores->ant->prox = livres;
+    livres->ant->prox = aux->setores->prox;
+    livres->ant = aux->setores->ant;
+
+    agroupNode(d);
+
+    return true;
 }
 
 bool disco_recupera(Disco *d, char *nome, char *arquivoDestino)
 {
+    FILE *destino;
+    NoArquivo *arquivo = d->arquivos->prox;
+
+    while (arquivo != d->arquivos)
+    {
+        if (strcmp(nome, arquivo->nome) == 0)
+        {
+            break;
+        }
+        arquivo = arquivo->prox;
+    }
+
+    destino = fopen(arquivoDestino, "wb");
+
+    NoSetor *setor = arquivo->setores->prox;
+
+    long int tam;
+
+    while (setor != arquivo->setores)
+    {
+
+        tam = (setor->fim - setor->inicio) + 1;
+
+        fwrite(d->disco + (setor->inicio), tam, 1, destino);
+
+        setor = setor->prox;
+    }
+
+    fclose(destino);
+
+    return true;
 }
 
-bool disco_lista(Disco *d, char *saida)
+bool disco_lista(Disco *d)
 {
+    printf("-----------------\n");
+    imprimeSetoresLivres(d);
+    printf("-----------------\n");
+    printf("ARQUIVOS: \n");
+
+    NoArquivo *arquivo = d->arquivos->prox;
+    while (arquivo != d->arquivos)
+    {
+        printf("%-30s (%9ld) ", arquivo->nome, arquivo->tam);
+
+        NoSetor *segmento = arquivo->setores->prox;
+        while (segmento != arquivo->setores)
+        {
+            printf("[%ld,%ld] ", segmento->inicio, segmento->fim);
+            segmento = segmento->prox;
+        }
+        printf("\n");
+        arquivo = arquivo->prox;
+    }
+    printf("\n");
 }
 
 /**************************************
@@ -223,24 +263,32 @@ NoSetor *freeSpace(long int tamNecessario, Disco *d)
 
     if (tamNecessario >= (aux->fim - aux->inicio))
     {
-        // Passa o No para o Setor Livre
         livre = aux;
 
-        // Desencadeando No Livre
         aux->ant->prox = aux->prox;
         aux->prox->ant = aux->ant;
     }
     else
     {
-        // Copia os dados necessarios para o NoSetor livre
         livre->inicio = aux->inicio;
         livre->fim = (aux->inicio + tamNecessario);
         livre->prox = livre;
         livre->ant = livre;
 
-        // Atualiza o primeiro no livre
         aux->inicio = (aux->inicio + tamNecessario);
     }
 
     return livre;
+}
+
+void imprimeSetoresLivres(Disco *d)
+{
+    printf("LIVRES: ");
+    NoSetor *aux = d->livres->prox;
+    while (aux != d->livres)
+    {
+        printf("[%ld,%ld] ", aux->inicio, aux->fim);
+        aux = aux->prox;
+    }
+    printf("\n");
 }

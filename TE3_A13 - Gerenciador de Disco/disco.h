@@ -6,7 +6,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define DIR "./img/"
+#define DIR "./images/"
 
 typedef struct nosetor
 {
@@ -38,10 +38,15 @@ typedef struct
 
 // PROTÓTIPOS DAS FUNÇÕES
 
-Disco *disco_cria(char *nome, unsigned long tamanho);
+Disco *disco_cria(char *nome, long int tamanho);
 bool disco_grava(Disco *d, char *arquivo);                       // nome arquivo deve conter o caminho absoluto ou relativo do arquivo
 bool disco_remove(Disco *d, char *nome);                         // somente o nome do arquivo sem o caminho
 bool disco_recupera(Disco *d, char *nome, char *arquivoDestino); // nome arquivo deve conter o caminho absoluto ou relativo do arquivo
-bool disco_lista(Disco *d, char *saida);
+bool disco_lista(Disco *d);
+
+void imprimeSetoresLivres(Disco *d);
+NoSetor *freeSpace(long int tamNecessario, Disco *d);
+bool agroupNode(Disco *d);
+long int catchSize(FILE *arq);
 
 #endif
