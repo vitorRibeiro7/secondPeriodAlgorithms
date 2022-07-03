@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+#define DIR "./img/"
+
 typedef struct nosetor
 {
     long int inicio;

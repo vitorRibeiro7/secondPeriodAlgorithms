@@ -81,6 +81,7 @@ Disco *disco_cria(char *nome, unsigned long tamanho)
     new->espacoLivre = tamanho;   // new Espaço livre
     new->qtdeArquivos = 0;        // new quantidade arquivos
 }
+
 bool disco_grava(Disco *d, char *arquivo)
 {
 
@@ -89,11 +90,90 @@ bool disco_grava(Disco *d, char *arquivo)
         return false;
     }
 
+    FILE *arqOrigem;
+    long int arqCopiado = 0;
+    long int arqRestante;
+
+    char caminho[200];
+    caminho[0] = '\0';
+    strcat(caminho, DIR);
+    strcat(caminho, arquivo);
+
+    arqOrigem = fopen(caminho, "rb");
+
+    if (arqOrigem == NULL)
+    {
+        perror("Erro ao abrir...");
+        return false;
+    }
+
+    long int tamArquivoOrigem = descobreTamanho(arqOrigem);
+
+    void *buffer = (void *)calloc(tamArquivoOrigem, sizeof(void));
+
+    if (buffer == NULL)
+    {
+        perror("Memoria insuficiente");
+        return false;
+    }
+
+    fread(buffer, tamArquivoOrigem, 1, arqOrigem);
+
+    long int espacoLivre;
+    NoSetor *segmentoLivre = (NoSetor *)malloc(sizeof(NoSetor));
+    arqRestante = tamArquivoOrigem;
+
+    NoSetor *sentinela = (NoSetor *)malloc(sizeof(NoSetor));
+    sentinela->ant = sentinela;
+    sentinela->prox = sentinela;
+
+    NoArquivo *arqAdd = (NoArquivo *)malloc(sizeof(NoArquivo));
+    strcpy(arqAdd->nome, arquivo);
+
+    arqAdd->prox = d->arquivos;
+    arqAdd->ant = d->arquivos->ant;
+
+    d->arquivos->ant->prox = arqAdd;
+    d->arquivos->ant = arqAdd;
+
+    arqAdd->setores = sentinela;
+    arqAdd->tam = tamArquivoOrigem;
+
+    while (arqCopiado < tamArquivoOrigem)
+    {
+
+        segmentoLivre = procuraEspacoLivre(arqRestante, d);
+
+        espacoLivre = (segmentoLivre->fim - segmentoLivre->inicio);
+
+        memcpy(d->disco + segmentoLivre->inicio, buffer + arqCopiado, espacoLivre);
+
+        arqCopiado += espacoLivre;
+        arqRestante -= espacoLivre;
+
+        segmentoLivre->ant = sentinela->ant;
+        segmentoLivre->prox = sentinela;
+
+        sentinela->ant->prox = segmentoLivre;
+        sentinela->ant = segmentoLivre;
+    }
+
+    fclose(arqOrigem);
+
     return true;
-} // nome arquivo deve conter o caminho absoluto ou relativo do arquivo
-bool disco_remove(Disco *d, char *nome);                         // somente o nome do arquivo sem o caminho
-bool disco_recupera(Disco *d, char *nome, char *arquivoDestino); // nome arquivo deve conter o caminho absoluto ou relativo do arquivo
-bool disco_lista(Disco *d, char *saida);
+}
+
+bool disco_remove(Disco *d, char *nome)
+{
+}
+
+bool disco_recupera(Disco *d, char *nome, char *arquivoDestino)
+{
+}
+
+bool disco_lista(Disco *d, char *saida)
+{
+}
 
 /**************************************
  * AUXILIARES
