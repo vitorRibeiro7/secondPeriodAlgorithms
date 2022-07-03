@@ -81,7 +81,16 @@ Disco *disco_cria(char *nome, unsigned long tamanho)
     new->espacoLivre = tamanho;   // new Espaço livre
     new->qtdeArquivos = 0;        // new quantidade arquivos
 }
-bool disco_grava(Disco *d, char *arquivo);                       // nome arquivo deve conter o caminho absoluto ou relativo do arquivo
+bool disco_grava(Disco *d, char *arquivo)
+{
+
+    if (d == NULL)
+    {
+        return false;
+    }
+
+    return true;
+} // nome arquivo deve conter o caminho absoluto ou relativo do arquivo
 bool disco_remove(Disco *d, char *nome);                         // somente o nome do arquivo sem o caminho
 bool disco_recupera(Disco *d, char *nome, char *arquivoDestino); // nome arquivo deve conter o caminho absoluto ou relativo do arquivo
 bool disco_lista(Disco *d, char *saida);
@@ -89,3 +98,69 @@ bool disco_lista(Disco *d, char *saida);
 /**************************************
  * AUXILIARES
  **************************************/
+
+long int catchSize(FILE *arq)
+{
+    rewind(arq);
+    fseek(arq, 0, SEEK_END);
+    int tamanho = ftell(arq);
+    rewind(arq);
+    return tamanho;
+}
+
+bool agroupNode(Disco *d)
+{
+    NoSetor *auxAtual = d->livres->prox;
+    NoSetor *aux;
+
+    while (auxAtual != d->livres)
+    {
+        aux = d->livres->prox;
+
+        while (aux != d->livres)
+        {
+            if (aux->inicio == auxAtual->fim)
+            {
+                auxAtual->fim = aux->fim;
+
+                aux->prox->ant = aux->ant;
+                aux->ant->prox = aux->prox;
+                free(aux);
+            }
+            aux = aux->prox;
+        }
+
+        auxAtual = auxAtual->prox;
+    }
+
+    return true;
+}
+
+NoSetor *freeSpace(long int tamNecessario, Disco *d)
+{
+    NoSetor *aux = d->livres->prox;
+    NoSetor *livre = (NoSetor *)malloc(sizeof(NoSetor));
+
+    if (tamNecessario >= (aux->fim - aux->inicio))
+    {
+        // Passa o No para o Setor Livre
+        livre = aux;
+
+        // Desencadeando No Livre
+        aux->ant->prox = aux->prox;
+        aux->prox->ant = aux->ant;
+    }
+    else
+    {
+        // Copia os dados necessarios para o NoSetor livre
+        livre->inicio = aux->inicio;
+        livre->fim = (aux->inicio + tamNecessario);
+        livre->prox = livre;
+        livre->ant = livre;
+
+        // Atualiza o primeiro no livre
+        aux->inicio = (aux->inicio + tamNecessario);
+    }
+
+    return livre;
+}
